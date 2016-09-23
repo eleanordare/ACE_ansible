@@ -5,6 +5,9 @@
       name: java-1.8.0-openjdk.x86_64
       state: latest
 
+  - name: set JAVA_HOME
+    shell: "sed -i 's/JAVA_HOME/# replaced by Ansible JAVA_HOME/' ~/.bash_profile ; echo 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk' >> ~/.bash_profile"
+
   - name: install apache maven
     yum:
       name:  maven
