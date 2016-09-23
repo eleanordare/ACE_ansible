@@ -1,0 +1,25 @@
+---
+- block:
+  - name: test git install
+    shell: "git --version"
+    register: git_version
+
+  - name: test java install
+    shell: "java -version"
+    register: java_version
+
+  - name: test maven install
+    shell: "mvn -v"
+    register: maven_version
+
+  - name: confirm git version
+    debug:
+      msg: "Git version: {{ git_version.stdout }}"
+
+  - name: confirm java version
+    debug:
+      msg: "Java version: {{ java_version.stderr }}"
+
+  - name: confirm maven version
+    debug:
+      msg: "Maven version: {{ maven_version.stdout }}"
