@@ -1,0 +1,98 @@
+---
+- name: ACE setup
+  hosts: localhost
+  become: true
+
+  tasks:
+    - block:
+      - name: install java dev kit 8
+        yum:
+          name: java-1.8.0-openjdk.x86_64
+          state: latest
+
+      - name: install apache maven
+        yum:
+          name:  maven
+          state: latest
+
+      - name: install git
+        yum:
+          name: git
+          state: latest
+
+      - name: set up servers folder
+        file:
+          state: directory
+          force: yes
+          dest: /home/servers
+          mode: 0755
+
+      - name: download tomcat
+        get_url:
+          url: http://mirror.stjschools.org/public/apache/tomcat/tomcat-8/v8.0.37/bin/apache-tomcat-8.0.37.tar.gz
+          dest: /home/servers/apache-tomcat-8.0.37.tar.gz
+
+      - name: install tomcat
+        unarchive:
+          src: /home/servers/apache-tomcat-8.0.37.tar.gz
+          dest: /home/servers
+
+      - name: install python2 dnf for ansible dnf module
+        yum:
+          name: python2-dnf
+          state: latest
+
+      - name: download mongodb
+        dnf:
+          name: mongodb-org
+          enablerepo: http://repo.mongodb.org/yum/redhat/7/mongodb-org/3.2/x86_64/
+          disable_gpg_check: yes
+          state: latest
+
+      - name: start mongodb
+        service:
+          name: mongod
+          state: started
+
+      - name: install npm
+        yum:
+          name: npm
+          state: latest
+
+      - name: install node
+        yum:
+          name: node
+          state: latest
+
+      - name: install rubygems for openshift
+        yum:
+          name: rubygem-rhc
+          state: latest
+
+      ignore_errors: yes
+
+
+    - block:
+      - name: test git install
+        shell: "git --version"
+        register: git_version
+
+      - name: test java install
+        shell: "java -version"
+        register: java_version
+
+      - name: test maven install
+        shell: "mvn -v"
+        register: maven_version
+
+      - name: confirm git version
+        debug:
+          msg: "Git version: {{ git_version.stdout }}"
+
+      - name: confirm java version
+        debug:
+          msg: "Java version: {{ java_version.stderr }}"
+
+      - name: confirm maven version
+        debug:
+          msg: "Maven version: {{ maven_version.stdout }}"
