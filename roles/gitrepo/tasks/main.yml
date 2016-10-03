@@ -2,5 +2,5 @@
 - name: clone ACE git repo
   git:
     clone: yes
-    dest: ~/Desktop/associate-consultant-enablement-repo
+    dest: "{{git_path}}"
     repo: ssh://git@gitlab.consulting.redhat.com:2222/rhtconsulting/associate-consultant-enablement.git
