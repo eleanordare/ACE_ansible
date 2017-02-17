@@ -32,7 +32,7 @@
 
   - name: download tomcat
     get_url:
-      url: http://mirror.metrocast.net/apache/tomcat/tomcat-9/v9.0.0.M17/bin/apache-tomcat-9.0.0.M.tar.gz
+      url: http://mirror.metrocast.net/apache/tomcat/tomcat-9/v9.0.0.M17/bin/apache-tomcat-9.0.0.M17.tar.gz
       dest: "{{tomcat_path}}.M17.tar.gz"
 
   - name: install tomcat
