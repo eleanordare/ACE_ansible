@@ -40,11 +40,9 @@
       src: "{{tomcat_path}}.M17.tar.gz"
       dest: "/home/{{username}}/servers"
 
-  - name: download mongodb
+  - name: install mongodb
     dnf:
       name: mongodb-org
-      enablerepo: http://repo.mongodb.org/yum/redhat/7/mongodb-org/3.2/x86_64/
-      disable_gpg_check: yes
       state: latest
 
   - name: start mongodb
