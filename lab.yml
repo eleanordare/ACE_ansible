@@ -3,7 +3,7 @@
   hosts: localhost
 
   vars:
-    tomcat_path: "{{ansible_env.HOME}}/servers/apache-tomcat-8.0.37/"
+    tomcat_path: "/home/emehlenb/servers/apache-tomcat-9.0.0"
     git_path: "{{ansible_env.HOME}}/Desktop/associate-consultant-enablement-repo/"
     node_path: "{{ansible_env.HOME}}/Desktop/associate-consultant-enablement-repo/lab/lab-web/src/main/webapp/"
 

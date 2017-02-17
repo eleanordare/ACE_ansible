@@ -1,11 +1,17 @@
 ---
 - name: ACE setup
   hosts: localhost
+  become: true
+
+  vars_prompt:
+    - name: "username"
+      prompt: "What is your laptop's non-root username?"
+      private: no
 
   vars:
-    tomcat_path: "{{ansible_env.HOME}}/servers/apache-tomcat-8.0.37/"
-    git_path: "{{ansible_env.HOME}}/Desktop/associate-consultant-enablement-repo/"
-    node_path: "{{ansible_env.HOME}}/Desktop/associate-consultant-enablement-repo/lab/lab-web/src/main/webapp/"
+    tomcat_path: "/home/{{username}}/servers/apache-tomcat-9.0.0"
+    git_path: "/home/{{username}}/Desktop/associate-consultant-enablement-repo/"
+    node_path: "/home/{{username}}/Desktop/associate-consultant-enablement-repo/lab/lab-web/src/main/webapp/"
 
   roles:
     - installs

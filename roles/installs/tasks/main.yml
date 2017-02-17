@@ -1,7 +1,12 @@
 ---
 - block:
+  - name: install python2 dnf for ansible dnf module
+    dnf:
+      name: python2-dnf
+      state: latest
+
   - name: install java dev kit 8
-    yum:
+    dnf:
       name: java-1.8.0-openjdk.x86_64
       state: latest
 
@@ -9,12 +14,12 @@
     shell: "sed -i 's/JAVA_HOME/# replaced by Ansible JAVA_HOME/' ~/.bash_profile ; echo 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk' >> ~/.bash_profile"
 
   - name: install apache maven
-    yum:
+    dnf:
       name:  maven
       state: latest
 
   - name: install git
-    yum:
+    dnf:
       name: git
       state: latest
 
@@ -22,23 +27,18 @@
     file:
       state: directory
       force: yes
-      dest: "{{ansible_env.HOME}}/servers"
-      mode: 0755
+      dest: "/home/{{username}}/servers"
+      mode: 777
 
   - name: download tomcat
     get_url:
-      url: http://mirror.stjschools.org/public/apache/tomcat/tomcat-8/v8.0.37/bin/apache-tomcat-8.0.37.tar.gz
-      dest: "{{tomcat_path}}.tar.gz"
+      url: http://mirror.metrocast.net/apache/tomcat/tomcat-9/v9.0.0.M17/bin/apache-tomcat-9.0.0.M.tar.gz
+      dest: "{{tomcat_path}}.M17.tar.gz"
 
   - name: install tomcat
     unarchive:
-      src: "{{tomcat_path}}.tar.gz"
-      dest: "{{ansible_env.HOME}}/servers"
-
-  - name: install python2 dnf for ansible dnf module
-    yum:
-      name: python2-dnf
-      state: latest
+      src: "{{tomcat_path}}.M17.tar.gz"
+      dest: "/home/{{username}}/servers"
 
   - name: download mongodb
     dnf:
@@ -58,12 +58,12 @@
       state: latest
 
   - name: install node
-    yum:
+    dnf:
       name: node
       state: latest
 
   - name: install rubygems for openshift
-    yum:
+    dnf:
       name: rubygem-rhc
       state: latest
 
