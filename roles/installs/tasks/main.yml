@@ -1,7 +1,7 @@
 ---
 - block:
   - name: install python2 dnf for ansible dnf module
-    dnf:
+    yum:
       name: python2-dnf
       state: latest
 
