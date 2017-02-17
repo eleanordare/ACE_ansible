@@ -28,7 +28,7 @@
       state: directory
       force: yes
       dest: "/home/{{username}}/servers"
-      mode: 777
+      mode: 0777
 
   - name: download tomcat
     get_url:
@@ -38,7 +38,7 @@
   - name: install tomcat
     unarchive:
       src: "{{tomcat_path}}.M17.tar.gz"
-      dest: "/home/{{username}}/servers"
+      dest: "/home/{{username}}/servers/"
 
   - name: install mongodb
     dnf:
