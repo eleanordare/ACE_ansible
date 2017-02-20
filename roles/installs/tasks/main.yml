@@ -1,8 +1,8 @@
 ---
 - block:
-  - name: install python2 dnf for ansible dnf module
+  - name: install python dnf for ansible dnf module
     yum:
-      name: python2-dnf
+      name: python-dnf
       state: latest
 
   - name: install java dev kit 8
